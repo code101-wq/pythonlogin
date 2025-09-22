@@ -1,0 +1,26 @@
+{% extends 'layout.html' %}
+
+{% block title %}Update Profile{% endblock %}
+
+{% block content %}
+
+<h2>Update Profile Picture</h2>
+<div class="block">
+<p>Select a new profile picture (PNG, JPG, GIF).</p>
+<form action="{{ url_for('profile_update') }}" method="post" enctype="multipart/form-data">
+<input type="file" name="profile_picture" accept=".png, .jpg, .jpeg, .gif">
+<input type="submit" value="Upload Picture">
+</form>
+{% if msg %}
+<p class="msg">{{ msg }}</p>
+{% endif %}
+</div>
+<div class="block">
+<h3>Current Profile Picture:</h3>
+{% if account['profile_picture'] %}
+<img src="{{ url_for('static', filename='uploads/' + account['profile_picture']) }}" alt="Current Profile Picture" width="150">
+{% else %}
+<p>No profile picture set.</p>
+{% endif %}
+</div>
+{% endblock %}
